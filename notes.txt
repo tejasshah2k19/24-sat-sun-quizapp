@@ -1,0 +1,11 @@
+
+
+
+data : temp 
+data : permanent :database 
+ 
+
+ 
+ M : bean{temp} , dao:{db query}  
+ V 
+ C 

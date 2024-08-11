@@ -1,0 +1,12 @@
+
+create database quizapp;
+
+use quizapp;
+
+create table users ( 
+	userId int primary key auto_increment,
+	firstName varchar(30),
+	email varchar(30),
+	password varchar(30),
+	role varchar(20)
+);
