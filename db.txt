@@ -10,3 +10,16 @@ create table users (
 	password varchar(30),
 	role varchar(20)
 );
+
+
+create table quiz (
+	quizId int primary key auto_increment,
+	title varchar(30),
+	totalQuestion int,
+	perQuestionPoint int,
+	negative boolean ,
+	minusPoint float, 
+	startDate varchar(30),
+	endDate varchar(30),
+	active boolean
+);
