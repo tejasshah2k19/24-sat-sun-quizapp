@@ -38,7 +38,9 @@ public class UserDao {
 
 	}
 
-	public boolean authenticate(String email, String password) {
+	// if user's credentials is correct -> then return all user detail
+	// else return null
+	public UserBean authenticate(String email, String password) {
 		try {
 			Class.forName(dbDriverName);
 			Connection con = DriverManager.getConnection(dbUrl, dbUserName, dbPassword);
@@ -48,16 +50,22 @@ public class UserDao {
 
 			ResultSet rs = pstmt.executeQuery(); // record
 			if (rs.next()) {
-				return true;// true
+				UserBean userBean = new UserBean();
+				userBean.setFirstName(rs.getString("firstName"));
+				userBean.setEmail(rs.getString("email"));
+				userBean.setRole(rs.getString("role"));
+				userBean.setUserId(rs.getInt("userId"));
+
+				return userBean;// true
 			} else {
-				return false;// wrong
+				return null;// wrong
 			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return false;
+		return null;
 	}
 
 }
