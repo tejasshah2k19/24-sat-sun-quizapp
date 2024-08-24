@@ -43,7 +43,7 @@
 
 			out.print("<td>");
 
-			out.print("<a href=''>Edit</a>");
+			out.print("<a href='EditQuizServlet?quizId="+q.getQuizId()+"'>Edit</a>");
 			out.print(" | <a href='DeleteQuizServlet?quizId="+q.getQuizId()+"'>Delete</a>");
 			
 

@@ -74,4 +74,57 @@ public class QuizDao {
 		}
 
 	}
+
+	public QuizBean getQuizById(Integer quizId) {
+		try {
+			Connection con = DbConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from quiz where quizId = ? order by startDate");
+			pstmt.setInt(1, quizId);
+
+			ResultSet rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				QuizBean quiz = new QuizBean();
+
+				quiz.setQuizId(rs.getInt("quizId"));
+				quiz.setActive(rs.getBoolean("active"));
+				quiz.setEndDate(rs.getString("endDate"));
+				quiz.setMinusPoint(rs.getFloat("minusPoint"));
+				quiz.setNegative(rs.getBoolean("negative"));
+				quiz.setPerQuestionPoint(rs.getInt("perQuestionPoint"));
+				quiz.setStartDate(rs.getString("startDate"));
+				quiz.setTitle(rs.getString("title"));
+				quiz.setTotalQuestion(rs.getInt("totalQuestion"));
+				return quiz;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public void updateQuiz(QuizBean quizBean) {
+
+		try {
+			Connection con = DbConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(
+					"update quiz set title = ? , totalQuestion = ? , perQuestionPoint = ? , negative = ? , minusPoint = ? , startDate = ? ,endDate = ? , active =?  where quizId = ? ");
+			pstmt.setString(1, quizBean.getTitle());
+			pstmt.setInt(2, quizBean.getTotalQuestion());
+			pstmt.setInt(3, quizBean.getPerQuestionPoint());
+			pstmt.setBoolean(4, quizBean.getNegative());
+			pstmt.setFloat(5, quizBean.getMinusPoint());
+			pstmt.setString(6, quizBean.getStartDate());
+			pstmt.setString(7, quizBean.getEndDate());
+			pstmt.setBoolean(8, quizBean.getActive());
+			pstmt.setInt(9, quizBean.getQuizId());
+			
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 }
