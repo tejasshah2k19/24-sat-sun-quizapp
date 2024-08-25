@@ -1,5 +1,8 @@
+<%@page import="com.bean.QuizBean"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+
 <html lang="en">
 <head>
 <!-- Required meta tags -->
@@ -27,92 +30,56 @@
 <body>
 	<div class="container-scroller">
 		<!-- partial:partials/_navbar.html -->
-		<jsp:include page="AdminHeader.jsp"></jsp:include>
+		<jsp:include page="UserHeader.jsp"></jsp:include>
 		<!-- partial -->
 		<div class="container-fluid page-body-wrapper">
 			<!-- partial:partials/_sidebar.html -->
-			<jsp:include page="AdminSidebar.jsp"></jsp:include>
+			<jsp:include page="UserSidebar.jsp"></jsp:include>
 			<!-- partial -->
 			<div class="main-panel">
 				<div class="content-wrapper">
 					<div class="row">
-
-
-						<div class="col-lg-6 grid-margin stretch-card">
+						<div class="col-lg-12 grid-margin stretch-card">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">Add Quiz</h4>
-									<p class="card-description">Fill Quiz Information</p>
+									<h4 class="card-title">Quiz</h4>
+									<p class="card-description"></p>
+
+									<%
+									ArrayList<QuizBean> allQuiz = (ArrayList<QuizBean>) request.getAttribute("allQuiz");
+									%>
+
+									<div class="table-responsive">
+										<table class="table table-striped table-hover">
+											<thead>   
+												<tr>
+ 													<th>Quiz Name</th>
+													<th>Start Date</th>
+													<th>End Date</th>
+ 													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+
+												<%
+												for (QuizBean q : allQuiz) {
+													out.print("<tr>");
+ 													out.print("<td>" + q.getTitle() + "</td>");
+													out.print("<td>" + q.getStartDate() + "</td>");
+													out.print("<td>" + q.getEndDate() + "</td>");
+
+													out.print("<td>");
+													out.print("<a href='UserQuizStartServlet?quizId=" + q.getQuizId() + "'>Start</a>");
+													out.print("</td>");
+													out.print("</tr>");
+
+												}
+												%>
 
 
-									<form class="pt-3" method="post" action="SaveQuizServlet">
-										<div class="form-group">
-											<input type="text" class="form-control form-control-lg"
-												id="exampleInputUsername1" placeholder="Title" name="title">
-										</div>
-
-
-										<div class="form-group">
-											<input type="text" class="form-control form-control-lg"
-												id="exampleInputUsername1" placeholder="TotalQuestion"
-												name="totalQuestion">
-										</div>
-
-										<div class="form-group">
-											<input type="text" class="form-control form-control-lg"
-												id="exampleInputUsername1" placeholder="Point Per Question"
-												name="perQuestionPoint">
-										</div>
-
-
-
-
-										<div>
-											IsNegative : <input type="checkbox" name="negative"
-												value="true">
-										</div>
-
-										<div class="form-group">
-											<input type="text" class="form-control form-control-lg"
-												id="exampleInputUsername1" placeholder="MinusPoint"
-												name="minusPoint">
-										</div>
-
-
-										<div class="form-group">
-											<input type="date" class="form-control form-control-lg"
-												id="exampleInputUsername1" placeholder="StartDate"
-												name="startDate">
-										</div>
-
-
-										<div class="form-group">
-											<input type="date" class="form-control form-control-lg"
-												id="exampleInputUsername1" placeholder="EndDate"
-												name="endDate">
-										</div>
-
-										<div>
-											Active : <input type="checkbox" id="exampleInputUsername1"
-												placeholder="Active" name="active" value="true"
-												checked="checked">
-										</div>
-
-
-
-
-
-
-
-
-										<div class="mt-3 d-grid gap-2">
-											<button type="submit"
-												class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">ADD
-												QUIZ</button>
-										</div>
-
-									</form>
-
+											</tbody>
+										</table>
+									</div>
 								</div>
 							</div>
 						</div>

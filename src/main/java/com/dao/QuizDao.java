@@ -126,5 +126,36 @@ public class QuizDao {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	
+	public ArrayList<QuizBean> getAllActiveQuiz() {
+		ArrayList<QuizBean> allQuiz = new ArrayList<QuizBean>();
+		try {
+			Connection con = DbConnection.getConnection();
+			PreparedStatement pstmt = con.prepareStatement("select * from quiz where active = true order by startDate");
+			ResultSet rs = pstmt.executeQuery();
+
+			while (rs.next()) {
+				QuizBean quiz = new QuizBean();
+
+				quiz.setQuizId(rs.getInt("quizId"));
+				quiz.setActive(rs.getBoolean("active"));
+				quiz.setEndDate(rs.getString("endDate"));
+				quiz.setMinusPoint(rs.getFloat("minusPoint"));
+				quiz.setNegative(rs.getBoolean("negative"));
+				quiz.setPerQuestionPoint(rs.getInt("perQuestionPoint"));
+				quiz.setStartDate(rs.getString("startDate"));
+				quiz.setTitle(rs.getString("title"));
+				quiz.setTotalQuestion(rs.getInt("totalQuestion"));
+				allQuiz.add(quiz);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return allQuiz;
+	}
+
 
 }

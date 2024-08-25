@@ -38,9 +38,10 @@ public class SaveQuizServlet extends HttpServlet {
 
 		QuizDao quizDao = new QuizDao();
 		quizDao.addQuiz(quizBean);
+
+		request.setAttribute("totalNumQuestion", totalQuestion);
 		
-		//redirect -> list
-		response.sendRedirect("ListQuizServlet");
+		request.getRequestDispatcher("AddQuestion.jsp").forward(request, response);
 		
 	}
 }
