@@ -45,8 +45,11 @@
 
 			out.print("<a href='EditQuizServlet?quizId="+q.getQuizId()+"'>Edit</a>");
 			out.print(" | <a href='DeleteQuizServlet?quizId="+q.getQuizId()+"'>Delete</a>");
+			out.print(" | <a href='AddQuestion.jsp?quizId="+q.getQuizId()+"&totalQuestion="+q.getTotalQuestion()+"'>Add Question</a>");
+			out.print(" | <a href='ListQuizQuestionServlet?quizId="+q.getQuizId()+"'>Show Questions</a>");
 			
-
+			
+			
 			out.print("</td>");
 
 			out.print("</tr>");

@@ -23,3 +23,15 @@ create table quiz (
 	endDate varchar(30),
 	active boolean
 );
+
+create table questions(
+	questionId int primary key auto_increment,
+	question varchar(300),
+	o1 varchar(100),
+	o2 varchar(100),
+	o3 varchar(100),
+	o4 varchar(100),
+	correctAns varchar(100),
+	quizId int 
+);
+
